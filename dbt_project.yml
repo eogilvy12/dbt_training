@@ -18,5 +18,5 @@ clean-targets:
 
 models:
   training_dbt:
-      example:
+      staging:
           materialized: view
