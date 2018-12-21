@@ -1,0 +1,22 @@
+name: 'training_dbt'
+version: '1.0'
+
+profile: 'training_dbt'
+
+
+source-paths: ["models"]
+analysis-paths: ["analysis"] 
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+
+target-path: "target"  
+clean-targets:      
+    - "target"
+    - "dbt_modules"
+
+
+models:
+  training_dbt:
+      example:
+          materialized: view
