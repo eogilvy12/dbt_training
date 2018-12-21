@@ -17,6 +17,26 @@ clean-targets:
 
 
 models:
+
   training_dbt:
-      staging:
-          materialized: view
+    staging:
+      materialized: view
+          
+  fishtown_analytics_ecommerce:
+    transform:
+      addresses:
+        enabled: false
+      order_items:
+        enabled: false
+      products:
+        enabled: false
+      customers:
+        materialized: table
+    vars:
+      customers_table: "{{ref('stg_customers')}}"
+      orders_table: "{{ref('stg_orders')}}"
+      customer_aggregate_on: customer_id
+      customer_join_on: customer_id
+      order_items_table: "not using this"
+      addresses_table: "not using this"
+      products_table: "not using this"

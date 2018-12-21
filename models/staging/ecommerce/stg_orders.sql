@@ -14,17 +14,22 @@ renamed as (
         
         --dimensions
         
-        total,
+        total as total_price,
         nullif(ip_address,'') as ip_address,
         nullif(street_address,'') as street_address,
         nullif(billing_country_code,'') as billing_country_code,
         nullif(referral_domain,'') as referral_domain,
         nullif(referral_url,'') as referral_url,
         
-        completed,
+        completed as is_completed,
         
         --dates
-        created_at
+        created_at,
+        case
+            when completed = false then {{ dbt_utils.current_timestamp() }}
+            else null
+        end as cancelled_at
+        
     from source
     
 )

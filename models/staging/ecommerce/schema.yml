@@ -10,15 +10,24 @@ models:
                 - unique
                 - not_null
           - name: customer_id
-            description: This is a foreign key to the customers table. Every customer has at least one order.
+            description: > 
+                This is a foreign key to the customers table. 
+                Every customer has at least one order.
             tests:
                 - not_null
                 - relationships:
                     to: ref('stg_customers')
                     field: customer_id
+          - name: cancelled_at
+            description: > 
+                This is always going to return the current_date instead 
+                of the date the fake order was cancelled and is used specifically 
+                for training/testing purposes to be able to feed this into the ecom package.
     
     - name: stg_customers
-      description: This data comes from a seed file an is one row per customer. Every customer has purchased at least once because this is fake generated data.
+      description: > 
+          This data comes from a seed file an is one row per customer. 
+          Every customer has purchased at least once because this is fake generated data.
       columns:
           - name: customer_id
             description: This is the primary key of the table.
@@ -35,7 +44,9 @@ models:
                 - unique
                 - not_null
           - name: order_id
-            description: This is a foreign key to the orders table. Every order has one or more items.
+            description: > 
+                This is a foreign key to the orders table. 
+                Every order has one or more items.
             tests:
                 - not_null
                 - relationships:

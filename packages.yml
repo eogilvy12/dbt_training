@@ -1,3 +1,7 @@
 packages:
+    
     - package: fishtown-analytics/dbt-utils
       version: '>0.1.18'
+      
+    - git: https://github.com/fishtown-analytics/ecommerce.git
+      revision: 0.1.7
