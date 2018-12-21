@@ -1,0 +1,43 @@
+version: 2
+
+models:
+    - name: stg_orders
+      description: This data comes from a seed file an is one row per order.
+      columns:
+          - name: order_id
+            description: This is the primary key of the table.
+            tests:
+                - unique
+                - not_null
+          - name: customer_id
+            description: This is a foreign key to the customers table. Every customer has at least one order.
+            tests:
+                - not_null
+                - relationships:
+                    to: ref('stg_customers')
+                    field: customer_id
+    
+    - name: stg_customers
+      description: This data comes from a seed file an is one row per customer. Every customer has purchased at least once because this is fake generated data.
+      columns:
+          - name: customer_id
+            description: This is the primary key of the table.
+            tests:
+                - unique
+                - not_null
+                
+    - name: stg_order_items
+      description: This data comes from a seed file an is one row per item ordered.
+      columns:
+          - name: order_item_id
+            description: This is the primary key of the table.
+            tests:
+                - unique
+                - not_null
+          - name: order_id
+            description: This is a foreign key to the orders table. Every order has one or more items.
+            tests:
+                - not_null
+                - relationships:
+                    to: ref('stg_orders')
+                    field: order_id
